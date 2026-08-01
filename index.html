@@ -3,411 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Troika Foods | Coming Soon</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Troika Foods</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    color:white;
-    background:linear-gradient(135deg,#431407,#7c2d12,#854d0e);
-    overflow:hidden;
+font-family:'Inter',sans-serif;
+background:#fff;
+color:#202124;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+position:relative;
 }
 
+/* subtle background */
 body::before{
-    content:"";
-    position:absolute;
-    width:700px;
-    height:700px;
-    background:rgba(255,255,255,.05);
-    border-radius:50%;
-    top:-250px;
-    right:-180px;
-    filter:blur(10px);
+content:"";
+position:absolute;
+width:450px;
+height:450px;
+background:#F3F8F3;
+border-radius:50%;
+top:-180px;
+right:-150px;
+filter:blur(10px);
 }
 
 body::after{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:rgba(255,255,255,.04);
-    border-radius:50%;
-    bottom:-180px;
-    left:-150px;
+content:"";
+position:absolute;
+width:300px;
+height:300px;
+background:#FFF7EB;
+border-radius:50%;
+bottom:-120px;
+left:-100px;
+filter:blur(8px);
 }
 
 .container{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-    position:relative;
-    z-index:2;
+width:100%;
+max-width:760px;
+padding:40px;
+text-align:center;
+position:relative;
+z-index:2;
 }
 
-.card{
-    max-width:700px;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:25px;
-    padding:50px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
+/* Logo */
 
 .logo{
-    font-size:48px;
-    margin-bottom:10px;
+width:72px;
+height:72px;
+margin:auto;
+margin-bottom:24px;
+border-radius:18px;
+background:#F7F8F7;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+box-shadow:0 4px 20px rgba(0,0,0,.05);
 }
 
 h1{
-    font-size:3rem;
-    font-weight:700;
-    letter-spacing:2px;
+font-size:3rem;
+font-weight:700;
+letter-spacing:-1px;
+margin-bottom:12px;
 }
 
-.tagline{
-    color:#FFD166;
-    font-size:1.1rem;
-    margin:12px 0 25px;
-    letter-spacing:3px;
+.subtitle{
+font-size:18px;
+color:#5f6368;
+margin-bottom:34px;
 }
 
-p{
-    color:#eee;
-    line-height:1.8;
-    font-size:17px;
+.description{
+max-width:620px;
+margin:auto;
+font-size:17px;
+line-height:1.8;
+color:#5f6368;
 }
 
-.coming{
-    display:inline-block;
-    margin-top:35px;
-    padding:15px 35px;
-    background:#FFD166;
-    color:#5B2C06;
-    border-radius:50px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    animation:pulse 2s infinite;
+.launch{
+display:inline-block;
+margin-top:40px;
+padding:12px 28px;
+border-radius:999px;
+background:#1E8E3E;
+color:white;
+font-weight:600;
+font-size:15px;
+letter-spacing:.3px;
+box-shadow:0 8px 24px rgba(30,142,62,.15);
+transition:.25s;
 }
 
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
+.launch:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 30px rgba(30,142,62,.2);
 }
 
 .footer{
-    margin-top:40px;
-    color:#ddd;
-    font-size:15px;
+margin-top:70px;
+font-size:14px;
+color:#80868B;
+line-height:2;
 }
 
 .footer a{
-    color:#FFD166;
-    text-decoration:none;
+color:#1E8E3E;
+text-decoration:none;
 }
 
-.spice{
-    position:absolute;
-    font-size:32px;
-    opacity:.18;
-    animation:float 8s infinite ease-in-out;
+/* Decorative Elements */
+
+.leaf{
+position:absolute;
+font-size:28px;
+opacity:.12;
+animation:float 8s ease-in-out infinite;
 }
 
-.s1{top:8%;left:8%;}
-.s2{top:15%;right:10%;animation-delay:2s;}
-.s3{bottom:15%;left:15%;animation-delay:4s;}
-.s4{bottom:8%;right:15%;animation-delay:1s;}
+.l1{top:12%;left:10%;}
+.l2{top:18%;right:12%;animation-delay:2s;}
+.l3{bottom:12%;left:14%;animation-delay:4s;}
+.l4{bottom:10%;right:12%;animation-delay:1s;}
 
 @keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-25px);}
+
+0%,100%{
+transform:translateY(0px);
 }
 
-@media(max-width:768px){
+50%{
+transform:translateY(-18px);
+}
 
-.card{
-padding:35px 25px;
+}
+
+@media(max-width:700px){
+
+.container{
+padding:25px;
 }
 
 h1{
-font-size:2.1rem;
+font-size:2.2rem;
 }
 
-.logo{
-font-size:40px;
+.subtitle{
+font-size:16px;
 }
 
-.tagline{
-font-size:15px;
-}
-
-p{
+.description{
 font-size:15px;
 }
 
 }
+
 </style>
 
 </head>
+
 <body>
 
-<div class="spice s1">🌿</div>
-<div class="spice s2">🌶️</div>
-<div class="spice s3">🌴</div>
-<div class="spice s4">✨</div>
+<div class="leaf l1">🌿</div>
+<div class="leaf l2">✨</div>
+<div class="leaf l3">🌾</div>
+<div class="leaf l4">🌶️</div>
 
 <div class="container">
 
-<div class="card">
-
 <div class="logo">🌿</div>
 
-<h1>TROIKA FOODS</h1>
+<h1>Troika Foods</h1>
 
-<div class="tagline">
+<div class="subtitle">
 Premium Spices • Dates • Quality Foods
 </div>
 
-<p>
-Bringing the authentic taste of nature to your kitchen.
-We are carefully crafting a premium range of spices, dates,
-and food products with uncompromising quality.
-</p>
+<div class="description">
+We're building a thoughtfully curated collection of premium spices,
+dates, and wholesome food products sourced with care and crafted for
+every kitchen.
+</div>
 
-<div class="coming">
+<div class="launch">
 Launching Soon
 </div>
 
 <div class="footer">
+
+Kerala, India
+
 <br><br>
-📍 Kerala, India
-<br><br>
-Contact:
-<a x>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Troika Foods | Coming Soon</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Poppins',sans-serif;
-    color:white;
-    background:linear-gradient(135deg,#431407,#7c2d12,#854d0e);
-    overflow:hidden;
-}
-
-body::before{
-    content:"";
-    position:absolute;
-    width:700px;
-    height:700px;
-    background:rgba(255,255,255,.05);
-    border-radius:50%;
-    top:-250px;
-    right:-180px;
-    filter:blur(10px);
-}
-
-body::after{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:rgba(255,255,255,.04);
-    border-radius:50%;
-    bottom:-180px;
-    left:-150px;
-}
-
-.container{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-    position:relative;
-    z-index:2;
-}
-
-.card{
-    max-width:700px;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:25px;
-    padding:50px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.logo{
-    font-size:48px;
-    margin-bottom:10px;
-}
-
-h1{
-    font-size:3rem;
-    font-weight:700;
-    letter-spacing:2px;
-}
-
-.tagline{
-    color:#FFD166;
-    font-size:1.1rem;
-    margin:12px 0 25px;
-    letter-spacing:3px;
-}
-
-p{
-    color:#eee;
-    line-height:1.8;
-    font-size:17px;
-}
-
-.coming{
-    display:inline-block;
-    margin-top:35px;
-    padding:15px 35px;
-    background:#FFD166;
-    color:#5B2C06;
-    border-radius:50px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-
-.footer{
-    margin-top:40px;
-    color:#ddd;
-    font-size:15px;
-}
-
-.footer a{
-    color:#FFD166;
-    text-decoration:none;
-}
-
-.spice{
-    position:absolute;
-    font-size:32px;
-    opacity:.18;
-    animation:float 8s infinite ease-in-out;
-}
-
-.s1{top:8%;left:8%;}
-.s2{top:15%;right:10%;animation-delay:2s;}
-.s3{bottom:15%;left:15%;animation-delay:4s;}
-.s4{bottom:8%;right:15%;animation-delay:1s;}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-25px);}
-}
-
-@media(max-width:768px){
-
-.card{
-padding:35px 25px;
-}
-
-h1{
-font-size:2.1rem;
-}
-
-.logo{
-font-size:40px;
-}
-
-.tagline{
-font-size:15px;
-}
-
-p{
-font-size:15px;
-}
-
-}
-</style>
-
-</head>
-<body>
-
-<div class="spice s1">🌿</div>
-<div class="spice s2">🌶️</div>
-<div class="spice s3">🌴</div>
-<div class="spice s4">✨</div>
-
-<div class="container">
-
-<div class="card">
-
-<div class="logo">🌿</div>
-
-<h1>TROIKA FOODS</h1>
-
-<div class="tagline">
-Premium Spices • Dates • Quality Foods
-</div>
-
-<p>
-Bringing the authentic taste of nature to your kitchen.
-We are carefully crafting a premium range of spices, dates,
-and food products with uncompromising quality.
-</p>
-
-<div class="coming">
-Launching Soon
-</div>
-
-<div class="footer">
-<br><br>
-📍 Kerala, India
-<br><br>
-Email:
-<a >
-7306525347
+<a href="mailto:info@troikafoods.com">
+info@troikafoods.com
 </a>
-</div>
 
-</div>
+&nbsp;&nbsp;•&nbsp;&nbsp;
 
-</div>
-
-</body>
-</html>
+<a href="tel:+917306525347">
++91 73065 25347
 </a>
-</div>
 
 </div>
 
