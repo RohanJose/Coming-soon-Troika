@@ -3,226 +3,386 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Troika Foods</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<title>Troika — Launching Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --cream:#F4EEE2;
+    --white:#FFFFFF;
+    --ink:#141210;
+    --ink-soft:#37332C;
+    --ink-dim:#7A7364;
+    --gold:#AD8A54;
+    --gold-bright:#C7A467;
+    --line: rgba(20,18,16,.14);
+    --dark:#120F0B;
+    --dark-2:#1C1712;
+    --ease:cubic-bezier(.16,.8,.24,1);
+  }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; background:var(--cream); }
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--ink); color:var(--cream); }
+  a{ color:inherit; text-decoration:none; }
 
-body{
-font-family:'Inter',sans-serif;
-background:#fff;
-color:#202124;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
-position:relative;
-}
+  .eyebrow{
+    font-size:12px; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--gold); font-weight:600;
+  }
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em; color:var(--ink); }
+  section{ position:relative; }
 
-/* subtle background */
-body::before{
-content:"";
-position:absolute;
-width:450px;
-height:450px;
-background:#F3F8F3;
-border-radius:50%;
-top:-180px;
-right:-150px;
-filter:blur(10px);
-}
+  /* scroll reveal utility, safe fallback = always visible */
+  .reveal{ opacity:1; }
+  @supports (animation-timeline: view()){
+    .reveal{
+      opacity:0; transform:translateY(26px);
+      animation: revealUp linear both; animation-timeline: view();
+      animation-range: entry 0% cover 32%;
+    }
+  }
+  @keyframes revealUp{ to{ opacity:1; transform:translateY(0); } }
+  .reveal.d1{ animation-delay:.05s; }
+  .reveal.d2{ animation-delay:.12s; }
+  .reveal.d3{ animation-delay:.2s; }
+  .reveal.light{ color:var(--cream); }
 
-body::after{
-content:"";
-position:absolute;
-width:300px;
-height:300px;
-background:#FFF7EB;
-border-radius:50%;
-bottom:-120px;
-left:-100px;
-filter:blur(8px);
-}
+  /* =========================================================
+     SITE HEADER — compact sticky wordmark bar
+  ========================================================= */
+  .site-header{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:16px 8%; background:var(--cream); border-bottom:1px solid var(--line);
+  }
+  .site-header .mark{ margin-bottom:0; }
+  .site-header .mark span{ width:4px; height:16px; }
+  .site-header .mark span:nth-child(2){ height:20px; }
+  .site-header .word{ font-family:'Fraunces',serif; font-weight:600; letter-spacing:.1em; font-size:1.05rem; color:var(--ink); }
 
-.container{
-width:100%;
-max-width:760px;
-padding:40px;
-text-align:center;
-position:relative;
-z-index:2;
-}
+  /* =========================================================
+     HERO — coming soon, cream + ink
+  ========================================================= */
+  .hero{
+    min-height:calc(100svh - 65px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:60px 32px;
+    background:var(--cream);
+  }
+  .mark{ display:flex; gap:6px; margin-bottom:22px; }
+  .mark span{ width:6px; height:44px; background:linear-gradient(180deg,var(--gold-bright),var(--gold)); border-radius:2px 2px 0 0; transform-origin:bottom; }
+  .mark span:nth-child(2){ height:56px; }
+  .mark span:nth-child(1){ animation: pillarRise .9s .05s var(--ease) both; }
+  .mark span:nth-child(2){ animation: pillarRise .9s .18s var(--ease) both; }
+  .mark span:nth-child(3){ animation: pillarRise .9s .31s var(--ease) both; }
+  @keyframes pillarRise{ from{ transform:scaleY(0); opacity:0;} to{ transform:scaleY(1); opacity:1;} }
 
-/* Logo */
+  .hero .eyebrow{ animation: fadeIn 1s .5s var(--ease) both; margin-bottom:18px; display:block; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
+  .hero h1{ font-size:clamp(2.3rem,6vw,3.8rem); line-height:1.05; max-width:640px; margin:18px auto 0; animation: fadeIn 1.1s .35s var(--ease) both; }
+  .hero .tagline{ max-width:480px; margin:20px auto 0; color:var(--ink-dim); font-size:15.5px; line-height:1.75; animation: fadeIn 1.1s .7s var(--ease) both; }
 
-.logo{
-width:72px;
-height:72px;
-margin:auto;
-margin-bottom:24px;
-border-radius:18px;
-background:#F7F8F7;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-box-shadow:0 4px 20px rgba(0,0,0,.05);
-}
+  .pill{
+    display:inline-flex; align-items:center; gap:10px; margin-top:38px; padding:12px 24px;
+    border:1px solid var(--line); border-radius:999px; font-size:13px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink); animation: fadeIn 1.1s .9s var(--ease) both;
+  }
+  .pill .dot{ width:7px; height:7px; border-radius:50%; background:var(--gold); animation: pulse 2.2s infinite; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(173,138,84,.45);} 70%{ box-shadow:0 0 0 9px rgba(173,138,84,0);} 100%{ box-shadow:0 0 0 0 rgba(173,138,84,0);} }
 
-h1{
-font-size:3rem;
-font-weight:700;
-letter-spacing:-1px;
-margin-bottom:12px;
-}
+  .scrollcue{
+    margin-top:60px; display:flex; flex-direction:column; align-items:center; gap:10px;
+    color:var(--ink-dim); font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+    animation: fadeIn 1s 1.3s var(--ease) both;
+  }
+  .scrollcue i{ width:1px; height:34px; background:linear-gradient(180deg,var(--gold),transparent); position:relative; overflow:hidden; }
+  .scrollcue i::after{ content:""; position:absolute; left:0; top:-34px; width:100%; height:34px; background:linear-gradient(180deg,transparent,var(--gold-bright)); animation:trickle 1.7s ease-in-out infinite; }
+  @keyframes trickle{ to{ top:34px; } }
 
-.subtitle{
-font-size:18px;
-color:#5f6368;
-margin-bottom:34px;
-}
+  /* =========================================================
+     INTRO — pinned headline crossfades over a dark photo-like
+     scroll section ("See" -> "what's coming.") mirrors the
+     reference: light type, sticky through the scroll, blended
+     so it stays legible over both light and dark ground.
+  ========================================================= */
+  .intro{ position:relative; view-timeline-name:--intro; view-timeline-axis:block; }
 
-.description{
-max-width:620px;
-margin:auto;
-font-size:17px;
-line-height:1.8;
-color:#5f6368;
-}
+  .headline-pin{
+    position:sticky; top:16vh; z-index:40; padding-left:8%;
+    pointer-events:none; mix-blend-mode:difference; color:#fff;
+  }
+  .headline-pin .eyebrow{ color:#C7A467; mix-blend-mode:normal; opacity:.9; display:block; margin-bottom:14px; }
+  .hl-line{ display:block; font-family:'Fraunces',serif; font-weight:600; line-height:.94; font-size:clamp(3rem,10vw,6.4rem); }
+  .hl-line2{ margin-top:-.08em; }
+  @supports (animation-timeline: view()){
+    .hl-line1{ animation: hlOut linear both; animation-timeline:--intro; animation-range: cover 0% cover 34%; }
+    .hl-line2{ opacity:.12; animation: hlIn linear both; animation-timeline:--intro; animation-range: cover 14% cover 48%; }
+  }
+  @keyframes hlOut{ to{ opacity:.14; transform:translateY(-10px) scale(.95); } }
+  @keyframes hlIn{ to{ opacity:1; } }
 
-.launch{
-display:inline-block;
-margin-top:40px;
-padding:12px 28px;
-border-radius:999px;
-background:#1E8E3E;
-color:white;
-font-weight:600;
-font-size:15px;
-letter-spacing:.3px;
-box-shadow:0 8px 24px rgba(30,142,62,.15);
-transition:.25s;
-}
+  .pour-track{
+    height:340vh; position:relative;
+    background:linear-gradient(180deg,var(--dark) 0%, var(--dark-2) 40%, var(--dark-2) 100%);
+    view-timeline-name:--pour; view-timeline-axis:block;
+  }
+  .pour-stage{ position:sticky; top:0; height:100svh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .pour-caption{ position:absolute; left:8%; bottom:9%; max-width:320px; z-index:5; }
+  .pour-caption .eyebrow{ display:block; margin-bottom:10px; color:var(--gold-bright); }
+  .pour-caption p{ color:#C9C2AF; font-size:15px; line-height:1.7; }
 
-.launch:hover{
-transform:translateY(-2px);
-box-shadow:0 12px 30px rgba(30,142,62,.2);
-}
+  .pouch{ position:relative; width:min(30vw,240px); aspect-ratio:3/4.1; transform-origin:70% 85%; z-index:4; }
+  @supports (animation-timeline: view()){
+    .pouch{ animation: pourTilt linear both; animation-timeline:--pour; animation-range: contain 8% contain 78%; }
+  }
+  @supports not (animation-timeline: view()){ .pouch{ transform:rotate(-52deg) translate(-6vw,2vh); } }
+  @keyframes pourTilt{
+    0%{ transform:rotate(0deg) translate(0,0); }
+    45%{ transform:rotate(0deg) translate(0,0); }
+    80%{ transform:rotate(-52deg) translate(-6vw,2vh); }
+    100%{ transform:rotate(-52deg) translate(-6vw,2vh); }
+  }
+  .pouch-body{ position:absolute; inset:0; background:linear-gradient(160deg,var(--cream) 0%, #E4D9BF 100%); clip-path: polygon(8% 6%, 92% 6%, 100% 18%, 96% 100%, 4% 100%, 0% 18%); box-shadow:0 30px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(0,0,0,.05); }
+  .pouch-seal{ position:absolute; top:0; left:6%; right:6%; height:9%; background:repeating-linear-gradient(90deg,#E4D9BF 0 6px,#cfc09a 6px 8px); border-radius:3px; }
+  .pouch-hole{ position:absolute; top:2.4%; left:50%; width:14px; height:14px; transform:translateX(-50%); border-radius:50%; background:var(--dark-2); }
+  .pouch-pillars{ position:absolute; top:22%; left:50%; transform:translateX(-50%); display:flex; gap:4px; }
+  .pouch-pillars span{ width:5px; height:20px; background:var(--gold); border-radius:1px 1px 0 0; }
+  .pouch-pillars span:nth-child(2){ height:26px; }
+  .pouch-word{ position:absolute; top:44%; left:0; right:0; text-align:center; font-family:'Fraunces',serif; font-weight:600; letter-spacing:.06em; font-size:clamp(14px,1.6vw,18px); color:var(--ink); }
+  .pouch-sub{ position:absolute; top:53%; left:0; right:0; text-align:center; font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:#5b5443; }
+  .pouch-window{ position:absolute; left:50%; bottom:16%; width:58%; aspect-ratio:1/.62; transform:translateX(-50%); border-radius:50%; background:radial-gradient(circle at 30% 25%,#f3d9a0,#d9ab5f 55%,#b6863d 100%); box-shadow:inset 0 0 14px rgba(0,0,0,.25); overflow:hidden; }
+  .pouch-window i{ position:absolute; width:22%; aspect-ratio:1.6/1; background:linear-gradient(160deg,#f4dfae,#c99a52); border-radius:60% 40% 55% 45%/60% 55% 45% 40%; }
+  .pouch-band{ position:absolute; left:0; right:0; bottom:0; height:12%; background:var(--ink); }
 
-.footer{
-margin-top:70px;
-font-size:14px;
-color:#80868B;
-line-height:2;
-}
+  .cashew{
+    --tx:0px; --ty:0px; --r:0deg; position:absolute; top:52%; left:47%;
+    width:34px; aspect-ratio:1.7/1; background:linear-gradient(160deg,#f4dfae,#c99a52 70%);
+    border-radius:60% 40% 55% 45%/60% 55% 45% 40%; box-shadow:0 6px 10px rgba(0,0,0,.4);
+    opacity:1; transform:translate(var(--tx),var(--ty)) rotate(var(--r)); z-index:3;
+  }
+  @supports (animation-timeline: view()){
+    .cashew{ opacity:0; animation: cashewFall linear both; animation-timeline:--pour; }
+  }
+  @keyframes cashewFall{ 0%{ opacity:0; transform:translate(0,-10px) rotate(0deg) scale(.5);} 100%{ opacity:1; transform:translate(var(--tx),var(--ty)) rotate(var(--r)) scale(1);} }
 
-.footer a{
-color:#1E8E3E;
-text-decoration:none;
-}
+  /* =========================================================
+     COLLECTION — white, minimal, hairline cards
+  ========================================================= */
+  .collection{ padding:min(14vw,150px) 8% 120px; background:var(--white); }
+  .section-head{ max-width:640px; margin:0 auto 70px; text-align:center; }
+  .section-head h2{ font-size:clamp(2.1rem,5vw,3.4rem); margin-top:14px; }
+  .section-head p{ color:var(--ink-dim); margin-top:16px; font-size:15.5px; line-height:1.7; }
 
-/* Decorative Elements */
+  .grid{ max-width:1080px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .card{ padding:30px 24px 26px; background:var(--white); transition:background .4s var(--ease); }
+  .card:hover{ background:var(--cream); }
+  .swatch{ width:100%; aspect-ratio:1/1; margin-bottom:20px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); }
+  .swatch .grain{ width:38%; aspect-ratio:1/1; border-radius:50%; }
+  .c-cardamom{ background:#EFEAE0; } .c-cardamom .grain{ background:linear-gradient(160deg,#6f8a5e,#3c5a41); border-radius:40% 60% 55% 45%/55% 45% 60% 40%; }
+  .c-pepper{ background:#EFEAE0; } .c-pepper .grain{ background:radial-gradient(circle at 35% 30%,#3a2f24,#100c08); }
+  .c-cashew{ background:#EFEAE0; } .c-cashew .grain{ background:linear-gradient(160deg,#f4dfae,#c99a52); border-radius:60% 40% 55% 45%/60% 55% 45% 40%; }
+  .c-masala{ background:#EFEAE0; } .c-masala .grain{ background:radial-gradient(circle at 35% 30%,#a1653a,#5c3a20); border-radius:20%; }
 
-.leaf{
-position:absolute;
-font-size:28px;
-opacity:.12;
-animation:float 8s ease-in-out infinite;
-}
+  .card h3{ font-size:1.1rem; font-weight:500; color:var(--ink); }
+  .card .local{ display:block; font-size:12px; color:var(--ink-dim); margin-top:4px; font-style:italic; font-family:'Fraunces',serif; }
+  .card p{ margin-top:12px; font-size:13.5px; line-height:1.65; color:var(--ink-dim); }
 
-.l1{top:12%;left:10%;}
-.l2{top:18%;right:12%;animation-delay:2s;}
-.l3{bottom:12%;left:14%;animation-delay:4s;}
-.l4{bottom:10%;right:12%;animation-delay:1s;}
+  /* =========================================================
+     STORY
+  ========================================================= */
+  .story{ padding:130px 8%; background:var(--cream); display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; max-width:1080px; margin:0 auto; }
+  .story-visual{ display:flex; justify-content:center; gap:18px; }
+  .pillar-figure{ width:64px; height:220px; border-radius:6px 6px 0 0; background:linear-gradient(180deg,var(--gold-bright),var(--gold) 60%,#8f7038); position:relative; }
+  .pillar-figure:nth-child(2){ height:260px; }
+  .pillar-figure::after{ content:""; position:absolute; left:0; right:0; bottom:-14px; height:14px; background:var(--ink); border-radius:3px; }
+  .story h2{ font-size:clamp(1.9rem,4vw,2.6rem); }
+  .story p{ margin-top:18px; color:var(--ink-dim); font-size:15.5px; line-height:1.85; }
+  .story p + p{ margin-top:14px; }
 
-@keyframes float{
+  /* =========================================================
+     COMING SOON / SOCIAL — the page's primary social block
+  ========================================================= */
+  .stamp{ display:inline-block; border:1.5px solid var(--ink); color:var(--ink); padding:9px 20px; border-radius:6px; transform:rotate(-3deg); font-family:'Fraunces',serif; letter-spacing:.1em; text-transform:uppercase; font-size:13px; font-weight:600; }
 
-0%,100%{
-transform:translateY(0px);
-}
+  .handle{
+    display:block; margin:36px auto 0; font-family:'Fraunces',serif; font-weight:600;
+    font-size:clamp(1.6rem,4vw,2.4rem); color:var(--ink); border-bottom:2px solid var(--ink);
+    width:max-content; padding-bottom:6px; transition:.35s var(--ease);
+  }
+  .handle:hover{ color:var(--gold); border-color:var(--gold); }
 
-50%{
-transform:translateY(-18px);
-}
+  .soon-links{ display:flex; justify-content:center; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .soon-links a{ display:inline-flex; align-items:center; gap:9px; padding:13px 22px; border-radius:999px; font-size:13.5px; letter-spacing:.03em; border:1px solid var(--line); transition:.35s var(--ease); color:var(--ink); }
+  .soon-links a svg{ width:16px; height:16px; }
+  .soon-links a.primary{ background:var(--ink); color:var(--cream); border-color:var(--ink); font-weight:600; }
+  .soon-links a:hover{ transform:translateY(-2px); border-color:var(--gold); }
+  .soon-links a.primary:hover{ background:var(--gold); color:var(--ink); }
 
-}
+  /* Instagram teaser card — stylised, links out (no fake embed) */
+  .ig-teaser{ max-width:340px; margin:60px auto 0; border:1px solid var(--line); border-radius:16px; overflow:hidden; text-align:left; }
+  .ig-teaser .ig-head{ display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--line); }
+  .ig-teaser .ig-avatar{ width:34px; height:34px; border-radius:50%; background:linear-gradient(160deg,var(--gold-bright),var(--gold)); display:flex; align-items:center; justify-content:center; }
+  .ig-teaser .ig-avatar span{ width:3px; height:14px; background:var(--ink); border-radius:1px; }
+  .ig-teaser .ig-name{ font-size:13.5px; font-weight:600; }
+  .ig-teaser .ig-name small{ display:block; font-weight:400; color:var(--ink-dim); font-size:11.5px; }
+  .ig-frame{ aspect-ratio:1/1; position:relative; background:linear-gradient(160deg,var(--dark) 0%, var(--dark-2) 100%); display:flex; align-items:center; justify-content:center; }
+  .ig-frame .play{ width:52px; height:52px; border-radius:50%; border:1.5px solid var(--cream); display:flex; align-items:center; justify-content:center; }
+  .ig-frame .play::after{ content:""; border-left:12px solid var(--cream); border-top:8px solid transparent; border-bottom:8px solid transparent; margin-left:4px; }
+  .ig-teaser .ig-foot{ padding:14px 16px; font-size:12.5px; color:var(--ink-dim); }
+  .ig-teaser .ig-foot a{ color:var(--ink); font-weight:600; border-bottom:1px solid var(--ink); }
 
-@media(max-width:700px){
+  /* =========================================================
+     FOOTER — dark bookend
+  ========================================================= */
+  footer{ padding:60px 8% 40px; background:var(--cream); color:var(--ink); border-top:1px solid var(--line); display:flex; flex-direction:column; align-items:center; gap:26px; text-align:center; }
+  .foot-mark{ display:flex; gap:4px; }
+  .foot-mark span{ width:4px; height:22px; background:var(--gold); border-radius:1px; }
+  .foot-mark span:nth-child(2){ height:28px; }
+  .social-row{ display:flex; gap:16px; }
+  .social-row a{ width:42px; height:42px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:.35s var(--ease); }
+  .social-row a svg{ width:17px; height:17px; stroke:var(--ink); transition:.35s; }
+  .social-row a:hover{ border-color:var(--gold-bright); background:rgba(199,164,103,.12); }
+  .social-row a:hover svg{ stroke:var(--gold); }
+  footer .addr{ color:var(--ink-dim); font-size:13px; line-height:1.9; }
+  footer .fine{ color:var(--ink-dim); font-size:11.5px; letter-spacing:.04em; }
 
-.container{
-padding:25px;
-}
+  /* =========================================================
+     RESPONSIVE
+  ========================================================= */
+  @media (max-width:860px){
+    .grid{ grid-template-columns:repeat(2,1fr); }
+    .story{ grid-template-columns:1fr; text-align:center; }
+    .story-visual{ order:-1; }
+  }
+  @media (max-width:520px){
+    .grid{ grid-template-columns:1fr 1fr; }
+    .collection{ padding:100px 6% 90px; }
+    .story{ padding:90px 6%; gap:40px; }
+    .pour-track{ height:280vh; }
+    .headline-pin{ top:10vh; }
+  }
 
-h1{
-font-size:2.2rem;
-}
-
-.subtitle{
-font-size:16px;
-}
-
-.description{
-font-size:15px;
-}
-
-}
-
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1 !important; transform:none !important; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<div class="leaf l1">🌿</div>
-<div class="leaf l2">✨</div>
-<div class="leaf l3">🌾</div>
-<div class="leaf l4">🌶️</div>
+  <!-- ============ SITE HEADER ============ -->
+  <header class="site-header">
+    <div class="mark"><span></span><span></span><span></span></div>
+    <span class="word">TROIKA</span>
+  </header>
 
-<div class="container">
+  <!-- ============ HERO: coming soon ============ -->
+  <section class="hero">
+    <div class="reveal">
 
-<div class="logo">🌿</div>
+      <span class="stamp">Coming soon</span>
+  
+      <p class="tagline">We're setting up online ordering so Troika reaches your kitchen directly. Follow along and we'll let you know the moment it's live.</p>
 
-<h1>Troika Foods</h1>
+      <a class="handle" href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv" target="_blank" rel="noopener">@troikafoods</a>
 
-<div class="subtitle">
-Premium Spices • Dates • Quality Foods
-</div>
+      <div class="soon-links">
+        <a class="primary" href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/share/188v7dPBcu/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8.5h2.5V5H15c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1Z"/></svg>
+          Facebook
+        </a>
+        <a href="https://wa.me/917510700539" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 4.9A10 10 0 0 0 3.5 17.4L2 22l4.7-1.5A10 10 0 1 0 20 4.9Z"/></svg>
+          WhatsApp
+        </a>
+     
+      </div>
 
-<div class="description">
-We're building a thoughtfully curated collection of premium spices,
-dates, and wholesome food products sourced with care and crafted for
-every kitchen.
-</div>
+      <div class="ig-teaser">
+        <div class="ig-head">
+          <div class="ig-avatar"><span></span></div>
+          <div class="ig-name">troikafoods<small>Kerala, India</small></div>
+        </div>
+        <a class="ig-frame" href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv" target="_blank" rel="noopener" aria-label="Watch on Instagram">
+          <div class="play"></div>
+        </a>
+        <div class="ig-foot">Reels &amp; behind-the-scenes on Instagram — <a href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv" target="_blank" rel="noopener">watch @troikafoods</a></div>
+      </div>
+    </div>
+  </section>
 
-<div class="launch">
-Launching Soon
-</div>
+  <!-- ============ INTRO: pinned headline over dark pour section ============ -->
+  <div class="intro">
+    <div class="headline-pin">
+    
+      <span class="hl-line hl-line1">See</span>
+      <span class="hl-line hl-line2">what's<br>coming.</span>
+    </div>
 
-<div class="footer">
+    <div class="pour-track">
+      <div class="pour-stage">
+        <div class="pouch">
+          <div class="pouch-body"></div>
+          <div class="pouch-seal"></div>
+          <div class="pouch-hole"></div>
+          <div class="pouch-pillars"><span></span><span></span><span></span></div>
+          <div class="pouch-word">TROIKA</div>
+          <div class="pouch-sub">Cashew</div>
+          <div class="pouch-window"><i style="top:30%;left:20%;"></i><i style="top:50%;left:50%;"></i><i style="top:20%;left:60%;"></i></div>
+          <div class="pouch-band"></div>
+        </div>
 
-Kerala, India
+        <span class="cashew" style="--tx:6vw; --ty:2vh; --r:40deg; top:58%; left:52%; animation-range: contain 46% contain 62%;"></span>
+        <span class="cashew" style="--tx:11vw; --ty:6vh; --r:120deg; width:26px; top:60%; left:50%; animation-range: contain 48% contain 66%;"></span>
+        <span class="cashew" style="--tx:16vw; --ty:3vh; --r:-30deg; top:56%; left:53%; animation-range: contain 50% contain 70%;"></span>
+        <span class="cashew" style="--tx:21vw; --ty:8vh; --r:80deg; width:22px; top:62%; left:49%; animation-range: contain 52% contain 74%;"></span>
+        <span class="cashew" style="--tx:9vw; --ty:11vh; --r:-70deg; top:64%; left:52%; animation-range: contain 54% contain 78%;"></span>
+        <span class="cashew" style="--tx:26vw; --ty:5vh; --r:15deg; width:30px; top:58%; left:51%; animation-range: contain 55% contain 82%;"></span>
+        <span class="cashew" style="--tx:-4vw; --ty:14vh; --r:100deg; width:24px; top:66%; left:50%; animation-range: contain 56% contain 84%;"></span>
+        <span class="cashew" style="--tx:31vw; --ty:9vh; --r:-45deg; top:60%; left:52%; animation-range: contain 58% contain 88%;"></span>
+        <span class="cashew" style="--tx:14vw; --ty:16vh; --r:60deg; width:20px; top:68%; left:51%; animation-range: contain 60% contain 90%;"></span>
+        <span class="cashew" style="--tx:36vw; --ty:2vh; --r:-10deg; width:28px; top:56%; left:53%; animation-range: contain 62% contain 92%;"></span>
+        <span class="cashew" style="--tx:1vw; --ty:18vh; --r:150deg; top:70%; left:50%; animation-range: contain 63% contain 94%;"></span>
+        <span class="cashew" style="--tx:19vw; --ty:20vh; --r:-100deg; width:22px; top:72%; left:51%; animation-range: contain 65% contain 96%;"></span>
+        <span class="cashew" style="--tx:41vw; --ty:14vh; --r:35deg; top:62%; left:52%; animation-range: contain 66% contain 98%;"></span>
+        <span class="cashew" style="--tx:-10vw; --ty:9vh; --r:-55deg; width:24px; top:60%; left:49%; animation-range: contain 64% contain 95%;"></span>
 
-<br><br>
+       
+      </div>
+    </div>
+  </div>
 
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="foot-mark"><span></span><span></span><span></span></div>
 
-&nbsp;&nbsp;•&nbsp;&nbsp;
+    <div class="social-row">
+      <a href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/188v7dPBcu/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 8.5h2.5V5H15c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1Z"/></svg>
+      </a>
+      <a href="https://wa.me/917510700539" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 4.9A10 10 0 0 0 3.5 17.4L2 22l4.7-1.5A10 10 0 1 0 20 4.9Z"/></svg>
+      </a>
+   
+    </div>
 
-<a href="tel:+917306525347">
-+91 73065 25347
-</a>
-
-</div>
-
-</div>
+    <div class="addr">Kerala, India<br>+91 75107 00539</div>
+    <div class="fine">© 2026 Troika Foods · Premium Spices, Crafted with Tradition</div>
+  </footer>
 
 </body>
 </html>
