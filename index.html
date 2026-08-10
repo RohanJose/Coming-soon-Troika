@@ -39,13 +39,20 @@
   h1,h2,h3{ font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em; color:var(--ink); }
   section{ position:relative; }
 
-  /* scroll reveal utility, safe fallback = always visible */
+  /* scroll reveal utility, safe fallback = always visible.
+     Scroll-driven (animation-timeline) reveal is reserved for devices with a
+     real mouse — on touch devices it's easy to get stuck at the "from" state
+     (invisible) because sticky/nested scroll containers confuse the timeline
+     on many phone browsers. Touch devices get the JS/IntersectionObserver
+     fallback below instead, which always resolves. */
   .reveal{ opacity:1; }
-  @supports (animation-timeline: view()){
-    .reveal{
-      opacity:0; transform:translateY(26px);
-      animation: revealUp linear both; animation-timeline: view();
-      animation-range: entry 0% cover 32%;
+  @media (hover:hover) and (pointer:fine){
+    @supports (animation-timeline: view()){
+      .reveal{
+        opacity:0; transform:translateY(26px);
+        animation: revealUp linear both; animation-timeline: view();
+        animation-range: entry 0% cover 32%;
+      }
     }
   }
   @keyframes revealUp{ to{ opacity:1; transform:translateY(0); } }
@@ -112,54 +119,40 @@
   @keyframes trickle{ to{ top:34px; } }
 
   /* =========================================================
-     INTRO — pinned headline crossfades over a dark photo-like
-     scroll section ("See" -> "what's coming.") mirrors the
-     reference: light type, sticky through the scroll, blended
-     so it stays legible over both light and dark ground.
+     INTRO — by default this is a plain, static block: a headline
+     over a dark "pour" panel with the pouch shown at rest. That's
+     the version every phone gets, guaranteed to render.
+
+     Only on devices with a real mouse (hover:hover + pointer:fine)
+     AND with animation-timeline support does it upgrade to the
+     pinned, scroll-scrubbed "See" -> "what's coming." + pouring
+     sequence — touch browsers are excluded on purpose because
+     scroll-driven timelines routinely get stuck at their initial
+     (invisible) keyframe on phones, even on ones that technically
+     report support for the feature.
   ========================================================= */
-  .intro{ position:relative; view-timeline-name:--intro; view-timeline-axis:block; }
+  .intro{ position:relative; }
 
   .headline-pin{
-    position:sticky; top:16vh; z-index:40; padding-left:8%;
-    pointer-events:none; mix-blend-mode:difference; color:#fff;
+    position:static; z-index:40; color:var(--ink); text-align:center;
+    padding:64px 8% 8px;
   }
-  .headline-pin .eyebrow{ color:#C7A467; mix-blend-mode:normal; opacity:.9; display:block; margin-bottom:14px; }
+  .headline-pin .eyebrow{ color:var(--gold); opacity:.9; display:block; margin-bottom:14px; }
   .hl-line{ display:block; font-family:'Fraunces',serif; font-weight:600; line-height:.94; font-size:clamp(3rem,10vw,6.4rem); }
   .hl-line2{ margin-top:-.08em; }
-  @supports (animation-timeline: view()){
-    .hl-line1{ animation: hlOut linear both; animation-timeline:--intro; animation-range: cover 0% cover 34%; }
-    .hl-line2{ opacity:.12; animation: hlIn linear both; animation-timeline:--intro; animation-range: cover 14% cover 48%; }
-  }
   @keyframes hlOut{ to{ opacity:.14; transform:translateY(-10px) scale(.95); } }
   @keyframes hlIn{ to{ opacity:1; } }
 
-  /* Browsers without scroll-driven animation support (most phones) get a
-     compact static intro instead of a pinned, scroll-scrubbed sequence —
-     avoids stranding mobile users in a huge, motionless scroll track. */
-  @supports not (animation-timeline: view()){
-    .headline-pin{ position:static; mix-blend-mode:normal; color:var(--ink); padding:64px 8% 8px; text-align:center; }
-    .pour-track{ height:auto; }
-    .pour-stage{ position:relative; height:auto; padding:56px 0 100px; flex-direction:column; }
-    .pouch{ transform:rotate(-12deg); }
-    .cashew{ display:none; }
-    .pour-caption{ position:static; max-width:360px; margin:34px auto 0; text-align:center; }
-  }
-
   .pour-track{
-    height:340vh; position:relative;
+    height:auto; position:relative;
     background:linear-gradient(180deg,var(--dark) 0%, var(--dark-2) 40%, var(--dark-2) 100%);
-    view-timeline-name:--pour; view-timeline-axis:block;
   }
-  .pour-stage{ position:sticky; top:0; height:100svh; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-  .pour-caption{ position:absolute; left:8%; bottom:9%; max-width:320px; z-index:5; }
+  .pour-stage{ position:relative; height:auto; padding:56px 0 100px; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .pour-caption{ position:static; max-width:360px; margin:34px auto 0; text-align:center; z-index:5; }
   .pour-caption .eyebrow{ display:block; margin-bottom:10px; color:var(--gold-bright); }
   .pour-caption p{ color:#C9C2AF; font-size:15px; line-height:1.7; }
 
-  .pouch{ position:relative; width:min(30vw,240px); aspect-ratio:3/4.1; transform-origin:70% 85%; z-index:4; }
-  @supports (animation-timeline: view()){
-    .pouch{ animation: pourTilt linear both; animation-timeline:--pour; animation-range: contain 8% contain 78%; }
-  }
-  @supports not (animation-timeline: view()){ .pouch{ transform:rotate(-52deg) translate(-6vw,2vh); } }
+  .pouch{ position:relative; width:min(30vw,240px); aspect-ratio:3/4.1; transform-origin:70% 85%; z-index:4; transform:rotate(-12deg); }
   @keyframes pourTilt{
     0%{ transform:rotate(0deg) translate(0,0); }
     45%{ transform:rotate(0deg) translate(0,0); }
@@ -182,12 +175,37 @@
     --tx:0px; --ty:0px; --r:0deg; position:absolute; top:52%; left:47%;
     width:34px; aspect-ratio:1.7/1; background:linear-gradient(160deg,#f4dfae,#c99a52 70%);
     border-radius:60% 40% 55% 45%/60% 55% 45% 40%; box-shadow:0 6px 10px rgba(0,0,0,.4);
-    opacity:1; transform:translate(var(--tx),var(--ty)) rotate(var(--r)); z-index:3;
-  }
-  @supports (animation-timeline: view()){
-    .cashew{ opacity:0; animation: cashewFall linear both; animation-timeline:--pour; }
+    z-index:3; display:none;
   }
   @keyframes cashewFall{ 0%{ opacity:0; transform:translate(0,-10px) rotate(0deg) scale(.5);} 100%{ opacity:1; transform:translate(var(--tx),var(--ty)) rotate(var(--r)) scale(1);} }
+
+  /* Fine-pointer, animation-timeline-capable devices only: the full
+     pinned crossfade + scroll-scrubbed pour sequence. */
+  @media (hover:hover) and (pointer:fine){
+    @supports (animation-timeline: view()){
+      .intro{ view-timeline-name:--intro; view-timeline-axis:block; }
+      .headline-pin{
+        position:sticky; top:16vh; padding:0 0 0 8%; text-align:left;
+        pointer-events:none; mix-blend-mode:difference; color:#fff;
+      }
+      .headline-pin .eyebrow{ color:#C7A467; mix-blend-mode:normal; }
+      .hl-line1{ animation: hlOut linear both; animation-timeline:--intro; animation-range: cover 0% cover 34%; }
+      .hl-line2{ opacity:.12; animation: hlIn linear both; animation-timeline:--intro; animation-range: cover 14% cover 48%; }
+
+      .pour-track{ height:340vh; view-timeline-name:--pour; view-timeline-axis:block; }
+      .pour-stage{ position:sticky; top:0; height:100svh; flex-direction:row; padding:0; }
+      .pour-caption{ position:absolute; left:8%; bottom:9%; max-width:320px; margin:0; text-align:left; }
+
+      .pouch{ transform:none; animation: pourTilt linear both; animation-timeline:--pour; animation-range: contain 8% contain 78%; }
+
+      .cashew{ display:block; opacity:0; transform:translate(var(--tx),var(--ty)) rotate(var(--r)); animation: cashewFall linear both; animation-timeline:--pour; }
+
+      @media (max-width:520px){
+        .pour-track{ height:280vh; }
+        .headline-pin{ top:10vh; }
+      }
+    }
+  }
 
   /* =========================================================
      COLLECTION — white, minimal, hairline cards
@@ -282,8 +300,6 @@
     .grid{ grid-template-columns:1fr 1fr; }
     .collection{ padding:100px 6% 90px; }
     .story{ padding:90px 6%; gap:40px; }
-    .pour-track{ height:280vh; }
-    .headline-pin{ top:10vh; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -408,8 +424,9 @@
 
   <script>
     (function(){
+      var finePointer = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
       var hasTimeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
-      if (hasTimeline) return;
+      if (finePointer && hasTimeline) return;
 
       document.documentElement.classList.add('js-fallback');
       var els = document.querySelectorAll('.reveal');
