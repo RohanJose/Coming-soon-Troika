@@ -69,20 +69,48 @@
   .js-fallback .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
   .js-fallback .reveal.is-visible{ opacity:1; transform:translateY(0); }
 
-  /* =========================================================
-     SITE HEADER — compact sticky wordmark bar
-  ========================================================= */
-  .site-header{
-    position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    padding:16px 8%; background:var(--cream); border-bottom:1px solid var(--line);
-  }
-  .site-header .mark{ margin-bottom:0; }
-  .site-header .mark span{ width:4px; height:16px; }
-  .site-header .mark span:nth-child(2){ height:20px; }
-  .site-header .word{ font-family:'Fraunces',serif; font-weight:600; letter-spacing:.1em; font-size:1.05rem; color:var(--ink); }
+/* =========================================================
+   SITE HEADER — logo
+========================================================= */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 8%;
+  background:var(--cream);
+  border-bottom:1px solid var(--line);
+}
 
-  /* =========================================================
+.site-logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.site-logo img{
+  display:block;
+  width:auto;
+  height:100px;
+  max-width:220px;
+  object-fit:contain;
+}
+
+/* Mobile */
+@media (max-width:520px){
+  .site-header{
+    padding:10px 6%;
+  }
+
+  .site-logo img{
+    height:36px;
+    max-width:160px;
+  }
+}
+
+/* ====================================================
      HERO — coming soon, cream + ink
   ========================================================= */
   .hero{
@@ -316,7 +344,7 @@
   <!-- ============ SITE HEADER ============ -->
 <header class="site-header">
   <a href="/" class="site-logo" aria-label="Troika Foods">
-    <img src="/images/logo.png" alt="Troika Foods">
+    <img src="/logo2.png" alt="Troika Foods">
   </a>
 </header>
 
