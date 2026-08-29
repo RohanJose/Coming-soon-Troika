@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Troika Foods — Crafted with Tradition</title>
+  <meta name="description" content="Discover Troika Foods — premium spices, crafted with tradition.">
+
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+
+  <!-- Fonts — same as main Troika website -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --cream:#F4EEE2;
+      --white:#FFFFFF;
+      --ink:#141210;
+      --ink-soft:#37332C;
+      --ink-dim:#7A7364;
+      --gold:#AD8A54;
+      --gold-bright:#C7A467;
+      --line:rgba(20,18,16,.14);
+      --dark:#120F0B;
+      --dark-2:#1C1712;
+      --ease:cubic-bezier(.16,.8,.24,1);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+      background:var(--cream);
+    }
+
+    body{
+      min-height:100svh;
+      font-family:'Inter',sans-serif;
+      background:var(--cream);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    ::selection{
+      background:var(--ink);
+      color:var(--cream);
+    }
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .page{
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .site-header{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:18px 6%;
+      border-bottom:1px solid var(--line);
+      background:rgba(244,238,226,.94);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .site-logo{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .site-logo img{
+      display:block;
+      width:auto;
+      height:auto;
+      max-width:190px;
+      max-height:60px;
+      object-fit:contain;
+    }
+
+    /* =========================================
+       MAIN
+    ========================================= */
+
+    main{
+      flex:1;
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+
+    .qr-page{
+      width:100%;
+      max-width:620px;
+      padding:58px 22px 70px;
+      text-align:center;
+    }
+
+    /* =========================================
+       BRAND MARK
+    ========================================= */
+
+    .mark{
+      display:flex;
+      justify-content:center;
+      align-items:flex-end;
+      gap:5px;
+      height:48px;
+      margin-bottom:27px;
+    }
+
+    .mark span{
+      width:6px;
+      height:35px;
+      background:linear-gradient(
+        180deg,
+        var(--gold-bright),
+        var(--gold)
+      );
+      border-radius:2px 2px 0 0;
+    }
+
+    .mark span:nth-child(2){
+      height:47px;
+    }
+
+    /* =========================================
+       TYPOGRAPHY
+    ========================================= */
+
+    .eyebrow{
+      display:block;
+      color:var(--gold);
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.30em;
+      line-height:1.4;
+      text-transform:uppercase;
+    }
+
+    h1{
+      margin-top:15px;
+      font-family:'Fraunces',serif;
+      font-size:clamp(2.5rem,11vw,4.2rem);
+      font-weight:600;
+      line-height:.98;
+      letter-spacing:-.025em;
+    }
+
+    .intro{
+      max-width:470px;
+      margin:19px auto 0;
+      color:var(--ink-dim);
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    /* =========================================
+       GOLD DIVIDER
+    ========================================= */
+
+    .divider{
+      width:42px;
+      height:1px;
+      margin:30px auto;
+      background:var(--gold);
+    }
+
+    /* =========================================
+       LINK BUTTONS
+    ========================================= */
+
+    .links{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      max-width:430px;
+      margin:0 auto;
+    }
+
+    .link-card{
+      position:relative;
+      display:flex;
+      align-items:center;
+      min-height:62px;
+      padding:13px 18px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.48);
+      transition:
+        transform .35s var(--ease),
+        background .35s var(--ease),
+        border-color .35s var(--ease),
+        box-shadow .35s var(--ease);
+    }
+
+    .link-card:hover{
+      transform:translateY(-2px);
+      border-color:var(--gold);
+      background:var(--white);
+      box-shadow:0 12px 30px rgba(20,18,16,.07);
+    }
+
+    .link-icon{
+      width:38px;
+      height:38px;
+      flex:0 0 38px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:var(--ink);
+      color:var(--cream);
+    }
+
+    .link-icon svg{
+      width:18px;
+      height:18px;
+      stroke:currentColor;
+    }
+
+    .link-content{
+      flex:1;
+      text-align:left;
+      padding:0 14px;
+    }
+
+    .link-title{
+      display:block;
+      font-size:14px;
+      font-weight:600;
+      line-height:1.3;
+    }
+
+    .link-subtitle{
+      display:block;
+      margin-top:3px;
+      color:var(--ink-dim);
+      font-size:11.5px;
+      line-height:1.35;
+    }
+
+    .arrow{
+      width:30px;
+      height:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+    }
+
+    .arrow svg{
+      width:17px;
+      height:17px;
+      stroke:currentColor;
+    }
+
+    /* =========================================
+       FEATURE PANEL
+    ========================================= */
+
+    .feature{
+      position:relative;
+      max-width:430px;
+      min-height:215px;
+      margin:42px auto 0;
+      padding:38px 28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      border-radius:18px;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(199,164,103,.18),
+          transparent 48%
+        ),
+        linear-gradient(
+          145deg,
+          var(--dark),
+          var(--dark-2)
+        );
+      color:var(--cream);
+      box-shadow:0 22px 50px rgba(20,18,16,.13);
+    }
+
+    .feature::before{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border:1px solid rgba(244,238,226,.10);
+      border-radius:12px;
+      pointer-events:none;
+    }
+
+    .feature-mark{
+      display:flex;
+      align-items:flex-end;
+      gap:4px;
+      height:32px;
+      margin-bottom:17px;
+    }
+
+    .feature-mark span{
+      width:4px;
+      height:22px;
+      border-radius:1px 1px 0 0;
+      background:linear-gradient(
+        180deg,
+        var(--gold-bright),
+        var(--gold)
+      );
+    }
+
+    .feature-mark span:nth-child(2){
+      height:30px;
+    }
+
+    .feature h2{
+      color:var(--cream);
+      font-family:'Fraunces',serif;
+      font-size:clamp(1.75rem,7vw,2.35rem);
+      font-weight:500;
+      line-height:1.08;
+      letter-spacing:-.015em;
+    }
+
+    .feature p{
+      max-width:340px;
+      margin-top:11px;
+      color:#C9C2AF;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    /* =========================================
+       SOCIAL NOTE
+    ========================================= */
+
+    .social-note{
+      margin-top:38px;
+      color:var(--ink-dim);
+      font-size:11px;
+      letter-spacing:.05em;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    footer{
+      padding:30px 20px 34px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      background:var(--cream);
+    }
+
+    .footer-links{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .footer-links a{
+      color:var(--ink-dim);
+      font-size:11.5px;
+      transition:color .3s var(--ease);
+    }
+
+    .footer-links a:hover{
+      color:var(--gold);
+    }
+
+    .footer-dot{
+      width:3px;
+      height:3px;
+      border-radius:50%;
+      background:var(--gold);
+    }
+
+    .copyright{
+      color:var(--ink-dim);
+      font-size:10.5px;
+      letter-spacing:.04em;
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width:520px){
+
+      .site-header{
+        padding:14px 6%;
+      }
+
+      .site-logo img{
+        max-width:155px;
+        max-height:52px;
+      }
+
+      .qr-page{
+        padding:48px 18px 60px;
+      }
+
+      .intro{
+        font-size:14px;
+      }
+
+      .link-card{
+        min-height:60px;
+      }
+
+      .feature{
+        margin-top:38px;
+        padding:34px 22px;
+      }
+    }
+
+    /* =========================================
+       REDUCED MOTION
+    ========================================= */
+
+    @media (prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        scroll-behavior:auto !important;
+        transition:none !important;
+        animation:none !important;
+      }
+    }
+
+    /* =========================================
+       SIMPLE ENTRANCE ANIMATION
+    ========================================= */
+
+    @keyframes rise{
+      from{
+        opacity:0;
+        transform:translateY(16px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .animate{
+      animation:rise .8s var(--ease) both;
+    }
+
+    .delay-1{
+      animation-delay:.08s;
+    }
+
+    .delay-2{
+      animation-delay:.16s;
+    }
+
+    .delay-3{
+      animation-delay:.24s;
+    }
+
+    .delay-4{
+      animation-delay:.32s;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="page">
+
+```
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="site-header">
+  <a
+    href="https://troikafoods.in"
+    class="site-logo"
+    aria-label="Troika Foods"
+  >
+    <img
+      src="/logo2.png"
+      alt="Troika Foods"
+    >
+  </a>
+</header>
+
+
+<!-- =========================================
+     MAIN QR LANDING PAGE
+========================================= -->
+
+<main>
+
+  <section class="qr-page">
+
+    <!-- Brand mark -->
+    <div class="mark animate">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+
+    <!-- Heading -->
+    <div class="animate delay-1">
+
+      <span class="eyebrow">
+        Welcome to Troika
+      </span>
+
+      <h1>
+        Crafted with<br>
+        Tradition.
+      </h1>
+
+      <p class="intro">
+        Discover Troika Foods — premium flavours inspired
+        by tradition, crafted with care, and made for
+        the modern kitchen.
+      </p>
+
+    </div>
+
+
+    <div class="divider animate delay-2"></div>
+
+
+    <!-- Main links -->
+    <div class="links animate delay-2">
+
+      <!-- Instagram -->
+      <a
+        class="link-card"
+        href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit Troika Foods on Instagram"
+      >
+
+        <span class="link-icon">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.6"
+          >
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="5"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="4"
+            />
+            <circle
+              cx="17.3"
+              cy="6.7"
+              r="1"
+              fill="currentColor"
+              stroke="none"
+            />
+          </svg>
+
+        </span>
+
+        <span class="link-content">
+
+          <span class="link-title">
+            Instagram
+          </span>
+
+          <span class="link-subtitle">
+            Follow @troikafoods
+          </span>
+
+        </span>
+
+        <span class="arrow">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.7"
+          >
+            <path d="M5 12h13"/>
+            <path d="m13 6 6 6-6 6"/>
+          </svg>
+
+        </span>
+
+      </a>
+
+
+      <!-- Facebook -->
+      <a
+        class="link-card"
+        href="https://www.facebook.com/people/Troika-Foods/61593130229684/?rdid=4uKb0umcWulfStEf&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F188v7dPBcu%2F"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit Troika Foods on Facebook"
+      >
+
+        <span class="link-icon">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.6"
+          >
+            <path d="M15 8.5h2.5V5H15c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1Z"/>
+          </svg>
+
+        </span>
+
+        <span class="link-content">
+
+          <span class="link-title">
+            Facebook
+          </span>
+
+          <span class="link-subtitle">
+            Follow Troika Foods
+          </span>
+
+        </span>
+
+        <span class="arrow">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.7"
+          >
+            <path d="M5 12h13"/>
+            <path d="m13 6 6 6-6 6"/>
+          </svg>
+
+        </span>
+
+      </a>
+
+
+      <!-- Website -->
+      <a
+        class="link-card"
+        href="https://troikafoods.in"
+        aria-label="Visit Troika Foods website"
+      >
+
+        <span class="link-icon">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.6"
+          >
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18"/>
+            <path d="M12 3c2.2 2.4 3.3 5.4 3.3 9S14.2 18.6 12 21"/>
+            <path d="M12 3c-2.2 2.4-3.3 5.4-3.3 9S9.8 18.6 12 21"/>
+          </svg>
+
+        </span>
+
+        <span class="link-content">
+
+          <span class="link-title">
+            Troika Foods
+          </span>
+
+          <span class="link-subtitle">
+            Visit our website
+          </span>
+
+        </span>
+
+        <span class="arrow">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.7"
+          >
+            <path d="M5 12h13"/>
+            <path d="m13 6 6 6-6 6"/>
+          </svg>
+
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <!-- Brand feature -->
+    <div class="feature animate delay-3">
+
+      <div class="feature-mark">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <h2>
+        Taste the<br>
+        Tradition.
+      </h2>
+
+      <p>
+        Premium spices, crafted with tradition
+        and brought to your kitchen by Troika Foods.
+      </p>
+
+    </div>
+
+
+    <p class="social-note animate delay-4">
+      Stay connected with Troika Foods
+    </p>
+
+  </section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+  <div class="footer-links">
+
+    <a
+      href="https://troikafoods.in"
+    >
+      Website
+    </a>
+
+    <span class="footer-dot"></span>
+
+    <a
+      href="https://www.instagram.com/troikafoods?igsh=ZzZtbW1jNWRta2tv"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Instagram
+    </a>
+
+    <span class="footer-dot"></span>
+
+    <a
+      href="https://www.facebook.com/people/Troika-Foods/61593130229684/?rdid=4uKb0umcWulfStEf&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F188v7dPBcu%2F"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Facebook
+    </a>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 Troika Foods · Kerala, India
+  </div>
+
+</footer>
+```
+
+  </div>
+
+</body>
+</html>
